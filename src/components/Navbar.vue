@@ -1,7 +1,9 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
     <BNavbar toggleable="lg" variant="dark" v-b-color-mode="'dark'">
-        <BNavbarBrand href="#">YACM</BNavbarBrand>
+        <RouterLink to="/">
+            <BNavbarBrand>YACV</BNavbarBrand>
+        </RouterLink>
         <BNavbarToggle target="nav-collapse" />
         <BCollapse id="nav-collapse" is-nav>
             <BNavbarNav>
