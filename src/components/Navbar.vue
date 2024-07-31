@@ -12,8 +12,8 @@
             <!-- Right aligned nav items -->
             <BNavbarNav class="ms-auto mb-2 mb-lg-0">
                 <BNavItemDropdown text="Language" right>
-                    <BDropdownItem href="#">EN</BDropdownItem>
-                    <BDropdownItem href="#">中文</BDropdownItem>
+                    <BDropdownItem @click="SetLanguage('en')">EN</BDropdownItem>
+                    <BDropdownItem @click="SetLanguage('zh')">中文</BDropdownItem>
                 </BNavItemDropdown>
                 <BNavItemDropdown right>
                     <!-- Using 'button-content' slot -->
@@ -31,3 +31,13 @@
         </BCollapse>
     </BNavbar>
 </template>
+
+<script setup lang="ts">
+import { useI18n } from "vue-i18n";
+const { locale } = useI18n();
+
+function SetLanguage(lang: string) {
+    console.log(`Requesting language change to ${lang}`);
+    locale.value = lang;
+}
+</script>
