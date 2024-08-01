@@ -6,7 +6,7 @@ import MangaDetailsView from "./components/views/MangaDetailsView.vue";
 const routes = [
     { path: "/", component: HomeView },
     {
-        path: "/details",
+        path: "/details/:mangaId",
         component: MangaDetailsView,
         props: true
     }

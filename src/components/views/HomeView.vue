@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import axios from "axios";
-import { BButtonGroup, BContainer, BRow, BSpinner } from "bootstrap-vue-next";
-import { load } from "cheerio";
+import { BContainer, BRow } from "bootstrap-vue-next";
 import { useI18n } from "vue-i18n";
 
 const { t } = useI18n();
+const router = useRouter();
+
+router.push("/details/dianjuren");
 </script>
 
 <template>
@@ -18,11 +19,6 @@ const { t } = useI18n();
 </template>
 
 <script lang="ts">
-import router from "@/router";
-import { useMangaStore } from "@/store";
-import { MangaChapters, type IManga } from "@/structures/Manga";
-import { ref } from "vue";
-import ErrorBox from "../ErrorBox.vue";
-import { Util } from "@/util";
+import { useRouter } from "vue-router";
 import SearchBar from "../home/SearchBar.vue";
 </script>

@@ -7,7 +7,7 @@
         <BNavbarToggle target="nav-collapse" />
         <BCollapse id="nav-collapse" is-nav>
             <BNavbarNav>
-                <BNavItem href="#">Home</BNavItem>
+                <BNavItem disabled>{{ Util.IsMobileDevice() ? "Mobile" : "PC" }}</BNavItem>
             </BNavbarNav>
             <!-- Right aligned nav items -->
             <BNavbarNav class="ms-auto mb-2 mb-lg-0">
@@ -33,6 +33,7 @@
 </template>
 
 <script setup lang="ts">
+import { Util } from "@/util";
 import Cookies from "js-cookie";
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();

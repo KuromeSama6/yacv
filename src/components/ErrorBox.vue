@@ -9,6 +9,11 @@ const props = defineProps<{
 
 <template>
     <div v-if="props.errorMessage">
-        <BAlert :model-value="true" variant="danger">{{ props.errorMessage }}</BAlert>
+        <BAlert :model-value="true" variant="danger">
+            {{ props.errorMessage }}
+            <br />
+
+            <small>Check console for thrown errors.</small>
+        </BAlert>
     </div>
 </template>

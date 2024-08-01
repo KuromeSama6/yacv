@@ -1,4 +1,4 @@
-import type { Cheerio, Element } from "cheerio";
+import type { MangaChapter, MangaDescriptor, MangaGroupData } from "@/data/Manga";
 
 export enum ChapterType {
     REGULAR = 1,
@@ -6,72 +6,22 @@ export enum ChapterType {
 }
 
 export interface IManga {
-    id: string;
-    title: string;
-    coverLink: string;
-    description: string;
-    author: string;
-    lastUpdated: string;
-    status: string;
-    chapters: MangaChapters;
-}
-
-export interface IChapter {
-    id: string;
-    name: string;
-    type: ChapterType;
-}
-
-export class SimpleChapter implements IChapter {
-    id: string;
-    name: string;
-    type: ChapterType;
-
-    constructor(data: any) {
-        this.id = data.id;
-        this.name = data.name;
-        this.type = data.type;
-    }
-}
-
-export class LatestChapter implements IChapter {
-    id: string;
-    name: string;
-    type: ChapterType;
-    constructor(data: any) {
-        this.id = data.comic_id;
-        this.name = data.name;
-        this.type = data.type;
-    }
+    descriptor: MangaDescriptor;
+    chapters: Chapters;
 }
 
 export interface IChapterGroup {
-    id: string;
-    name: string;
-    total: number;
-    latest: IChapter;
-    chapters: IChapter[];
+    group: MangaGroupData;
+    chapters: MangaChapter[];
 }
 
-export class MangaChapters {
+export class Chapters {
     public groups: { [key: string]: IChapterGroup } = {};
 
-    constructor(data: any) {
-        for (const key in data.groups) {
-            const group = data.groups[key];
-            const chapterGroup: IChapterGroup = {
-                id: key,
-                name: group.name,
-                total: group.count,
-                latest: new LatestChapter(group.last_chapter),
-                chapters: []
-            };
-
-            for (const chapter of group.chapters) {
-                chapterGroup.chapters.push(new SimpleChapter(chapter));
-            }
-
-            this.groups[key] = chapterGroup;
-        }
+    public AddGroup(group: MangaGroupData, chapters: MangaChapter[]) {
+        this.groups[group.path_word] = {
+            group: group,
+            chapters: chapters
+        };
     }
 }

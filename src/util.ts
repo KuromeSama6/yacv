@@ -41,4 +41,13 @@ export module Util {
             }
         });
     }
+
+    export function GetUserAgent(): string {
+        return navigator.userAgent.toString();
+    }
+
+    export function IsMobileDevice(): boolean {
+        const userAgent = GetUserAgent().toLowerCase();
+        return /android/.test(userAgent) || /iphone|ipad/.test(userAgent);
+    }
 }
