@@ -3,7 +3,7 @@
         <BRow>
             <BInputGroup class="mt-3">
                 <BFormInput :placeholder="t('HomeView.manga_url_prompt')" v-model="inputText" />
-                <BButton variant="primary" @click="HandleSearch">Search</BButton>
+                <BButton variant="primary" @click="HandleSearch(1)">Search</BButton>
             </BInputGroup>
         </BRow>
         <BRow class="mt-3" v-if="loading">
@@ -98,8 +98,6 @@ async function HandleSearch(page: number = 1) {
     currentStep.value = "Searching...";
 
     var res;
-    console.log(currentPage.value);
-    console.log((currentPage.value - 1) * ENTRIES_PER_PAGE);
 
     try {
         res = (
