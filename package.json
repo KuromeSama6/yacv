@@ -14,16 +14,20 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@types/crypto-js": "^4.2.2",
     "@types/js-cookie": "^3.0.6",
+    "@types/puppeteer": "^7.0.4",
     "axios": "^1.7.2",
     "bootstrap": "^5.3.3",
     "bootstrap-vue-next": "^0.24.2",
     "cheerio": "^1.0.0-rc.12",
+    "crypto-js": "^4.2.0",
     "i18n": "^0.15.1",
     "js-cookie": "^3.0.5",
     "pinia": "^2.2.0",
     "vue": "^3.4.29",
     "vue-i18n": "^10.0.0-beta.5",
+    "vue-lazysizes": "^1.0.5",
     "vue-router": "4"
   },
   "devDependencies": {

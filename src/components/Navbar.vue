@@ -24,20 +24,22 @@
                     <BDropdownItem href="#">Sign Out</BDropdownItem>
                 </BNavItemDropdown>
             </BNavbarNav>
-            <BNavForm class="d-flex">
+            <!-- <BNavForm class="d-flex">
                 <BFormInput class="me-2" placeholder="Search for a Manga" />
                 <BButton type="submit" variant="primary">Go</BButton>
-            </BNavForm>
+            </BNavForm> -->
         </BCollapse>
     </BNavbar>
 </template>
 
 <script setup lang="ts">
+import Cookies from "js-cookie";
 import { useI18n } from "vue-i18n";
 const { locale } = useI18n();
 
 function SetLanguage(lang: string) {
     console.log(`Requesting language change to ${lang}`);
     locale.value = lang;
+    Cookies.set("language", lang);
 }
 </script>

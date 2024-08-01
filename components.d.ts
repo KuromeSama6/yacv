@@ -7,12 +7,18 @@ export {}
 /* prettier-ignore */
 declare module 'vue' {
   export interface GlobalComponents {
+    BBadge: typeof import('bootstrap-vue-next')['BBadge']
     BButton: typeof import('bootstrap-vue-next')['BButton']
+    BButtonGroup: typeof import('bootstrap-vue-next')['BButtonGroup']
+    BCard: typeof import('bootstrap-vue-next')['BCard']
+    BCardImg: typeof import('bootstrap-vue-next')['BCardImg']
+    BCardText: typeof import('bootstrap-vue-next')['BCardText']
     BCollapse: typeof import('bootstrap-vue-next')['BCollapse']
     BDropdownItem: typeof import('bootstrap-vue-next')['BDropdownItem']
     BFormInput: typeof import('bootstrap-vue-next')['BFormInput']
     BInputGroup: typeof import('bootstrap-vue-next')['BInputGroup']
     BInputGroupText: typeof import('bootstrap-vue-next')['BInputGroupText']
+    BListGroupItem: typeof import('bootstrap-vue-next')['BListGroupItem']
     BNavbar: typeof import('bootstrap-vue-next')['BNavbar']
     BNavbarBrand: typeof import('bootstrap-vue-next')['BNavbarBrand']
     BNavbarNav: typeof import('bootstrap-vue-next')['BNavbarNav']
@@ -20,11 +26,19 @@ declare module 'vue' {
     BNavForm: typeof import('bootstrap-vue-next')['BNavForm']
     BNavItem: typeof import('bootstrap-vue-next')['BNavItem']
     BNavItemDropdown: typeof import('bootstrap-vue-next')['BNavItemDropdown']
+    BPagination: typeof import('bootstrap-vue-next')['BPagination']
+    BSpinner: typeof import('bootstrap-vue-next')['BSpinner']
+    ErrorBox: typeof import('./src/components/ErrorBox.vue')['default']
     HomeView: typeof import('./src/components/views/HomeView.vue')['default']
+    LoadingDisplay: typeof import('./src/components/manga/LoadingDisplay.vue')['default']
+    MainSearchBar: typeof import('./src/components/home/MainSearchBar.vue')['default']
+    MangaDetailsCard: typeof import('./src/components/manga/MangaDetailsCard.vue')['default']
     MangaDetailsView: typeof import('./src/components/views/MangaDetailsView.vue')['default']
+    MangaSearchPreview: typeof import('./src/components/manga/MangaSearchPreview.vue')['default']
     Navbar: typeof import('./src/components/Navbar.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    SearchBar: typeof import('./src/components/home/SearchBar.vue')['default']
   }
   export interface ComponentCustomProperties {
     vBColorMode: typeof import('bootstrap-vue-next')['vBColorMode']
