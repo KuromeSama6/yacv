@@ -5,7 +5,7 @@ import { useI18n } from "vue-i18n";
 const { t } = useI18n();
 const router = useRouter();
 
-router.push("/details/dianjuren");
+// router.push(`/read/dianjuren/dc312a94-f526-11e8-a7d3-00163e0ca5bd`);
 </script>
 
 <template>

@@ -89,6 +89,12 @@ export interface MangaChapter {
     img_type: number;
     news: string;
     datetime_created: string;
-    prev: any;
-    next: string;
+    prev?: string;
+    next?: string;
+}
+
+export interface Manga {
+    name: string;
+    uuid: string;
+    path_word: string;
 }

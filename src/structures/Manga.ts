@@ -1,4 +1,4 @@
-import type { MangaChapter, MangaDescriptor, MangaGroupData } from "@/data/Manga";
+import type { Manga, MangaChapter, MangaDescriptor, MangaGroupData } from "@/data/Manga";
 
 export enum ChapterType {
     REGULAR = 1,
@@ -8,6 +8,16 @@ export enum ChapterType {
 export interface IManga {
     descriptor: MangaDescriptor;
     chapters: Chapters;
+}
+
+export interface IMangaDetails {
+    comic: MangaDescriptor;
+    groups: MangaGroupData[];
+}
+
+export interface IMangaChapter {
+    chapter: MangaChapter;
+    manga: Manga;
 }
 
 export interface IChapterGroup {

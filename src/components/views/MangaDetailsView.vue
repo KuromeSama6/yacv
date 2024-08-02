@@ -4,6 +4,8 @@ import { Chapters, type IManga } from "@/structures/Manga";
 import axios from "axios";
 import { ref } from "vue";
 import LoadingIndicator from "../LoadingIndicator.vue";
+import MangaDetailsCard from "../manga/MangaDetailsCard.vue";
+import { CopyMangaAPI } from "@/api";
 
 const props = defineProps({
     mangaId: String
@@ -19,17 +21,7 @@ console.log(`Loading manga: ${props.mangaId}`);
 async function Load() {
     var details;
     try {
-        details = (
-            await axios.get(`https://api.mangacopy.com/api/v3/comic2/${props.mangaId}`, {
-                headers: {
-                    platform: 1
-                },
-                params: {
-                    platform: 1,
-                    _update: true
-                }
-            })
-        ).data.results;
+        details = await CopyMangaAPI.GetMangaDetails(props.mangaId || "");
     } catch (err: any) {
         loading.value = false;
         console.error(err);
@@ -50,21 +42,14 @@ async function Load() {
         loadContent.value = `Loading group ${group.path_word}`;
 
         try {
-            const res = (
-                await axios.get(`https://api.mangacopy.com/api/v3/comic/${props.mangaId}/group/${group.path_word}/chapters`, {
-                    headers: {
-                        platform: 1
-                    },
-                    params: {
-                        limit: group.count,
-                        offset: 0,
-                        _update: true
-                    }
-                })
-            ).data.results;
+            const res = await CopyMangaAPI.GetMangaChapters(
+                props.mangaId || "",
+                group.path_word,
+                group.count
+            );
 
-            console.log(res.list);
-            ret.chapters.AddGroup(group, res.list);
+            console.log(res);
+            ret.chapters.AddGroup(group, res);
         } catch (err: any) {
             loading.value = false;
             console.error(err);
@@ -73,14 +58,16 @@ async function Load() {
         }
     }
 
+    manga.value = ret;
     console.log(ret);
+    loading.value = false;
 }
 Load();
 </script>
 
 <template>
     <div>
-        <!-- <MangaDetailsCard v-for="manga in mangaStore.currentList" :key="manga.id" :manga="manga" /> -->
         <LoadingIndicator :visible="loading" :content="loadContent" :error="loadError" />
+        <MangaDetailsCard v-if="manga" :manga="manga" />
     </div>
 </template>

@@ -1,4 +1,5 @@
 import "bootstrap/dist/css/bootstrap.min.css";
+import "lazysizes";
 // import "./assets/base.css";
 // import "./assets/main.css";
 // import "./assets/styles.css";

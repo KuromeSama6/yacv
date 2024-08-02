@@ -7,7 +7,7 @@
         <BNavbarToggle target="nav-collapse" />
         <BCollapse id="nav-collapse" is-nav>
             <BNavbarNav>
-                <BNavItem disabled>{{ Util.IsMobileDevice() ? "Mobile" : "PC" }}</BNavItem>
+                <!-- <NavBreadcrumbs /> -->
             </BNavbarNav>
             <!-- Right aligned nav items -->
             <BNavbarNav class="ms-auto mb-2 mb-lg-0">
@@ -20,9 +20,10 @@
                     <template #button-content>
                         <em>User</em>
                     </template>
-                    <BDropdownItem href="#">Profile</BDropdownItem>
-                    <BDropdownItem href="#">Sign Out</BDropdownItem>
+                    <BDropdownItem href="javascript:;">Profile</BDropdownItem>
+                    <BDropdownItem href="javascript:;">Sign Out</BDropdownItem>
                 </BNavItemDropdown>
+                <BNavItem href="javascript:;">Options</BNavItem>
             </BNavbarNav>
             <!-- <BNavForm class="d-flex">
                 <BFormInput class="me-2" placeholder="Search for a Manga" />
@@ -33,10 +34,14 @@
 </template>
 
 <script setup lang="ts">
-import { Util } from "@/util";
 import Cookies from "js-cookie";
 import { useI18n } from "vue-i18n";
+import NavBreadcrumbs from "./NavBreadcrumbs.vue";
+import { BNavItem } from "bootstrap-vue-next";
+import { useRoute } from "vue-router";
 const { locale } = useI18n();
+
+const route = useRoute();
 
 function SetLanguage(lang: string) {
     console.log(`Requesting language change to ${lang}`);

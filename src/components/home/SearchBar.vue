@@ -20,11 +20,25 @@
     <BContainer v-if="searchResult?.list.length">
         <BRow>
             <BListGroup>
-                <MangaSearchPreview v-for="manga in searchResult.list" :key="manga.path_word" :manga="manga" :searchHandler="ShowMangaDetails" />
+                <MangaSearchPreview
+                    v-for="manga in searchResult.list"
+                    :key="manga.path_word"
+                    :manga="manga"
+                    :searchHandler="ShowMangaDetails"
+                />
             </BListGroup>
         </BRow>
         <BRow>
-            <BPagination v-model="currentPage" :total-rows="searchResult.total" :per-page="ENTRIES_PER_PAGE" first-text="First" prev-text="Prev" next-text="Next" last-text="Last" @page-click="PaginationClicked" />
+            <BPagination
+                v-model="currentPage"
+                :total-rows="searchResult.total"
+                :per-page="ENTRIES_PER_PAGE"
+                first-text="First"
+                prev-text="Prev"
+                next-text="Next"
+                last-text="Last"
+                @page-click="PaginationClicked"
+            />
         </BRow>
     </BContainer>
 
@@ -34,13 +48,23 @@
 <script setup lang="ts">
 import type { IMangaSearchResult } from "@/structures/MangaSearch";
 import axios from "axios";
-import { BContainer, BInputGroup, BListGroup, BPagination, BRow, BvEvent } from "bootstrap-vue-next";
+import {
+    BContainer,
+    BInputGroup,
+    BListGroup,
+    BPagination,
+    BRow,
+    BvEvent
+} from "bootstrap-vue-next";
 import { ref } from "vue";
 import { useI18n } from "vue-i18n";
 import ErrorBox from "../ErrorBox.vue";
 import MangaSearchPreview from "../manga/MangaSearchPreview.vue";
+import { useRouter } from "vue-router";
+import { CopyMangaAPI } from "@/api";
 
 const { t } = useI18n();
+const router = useRouter();
 
 const ENTRIES_PER_PAGE = 20;
 
@@ -73,21 +97,11 @@ async function HandleSearch(page: number = 1, clearValue: boolean = false) {
     var res;
 
     try {
-        res = (
-            await axios.get("https://api.mangacopy.com/api/v3/search/comic", {
-                headers: {
-                    platform: 1
-                },
-                params: {
-                    platform: 1,
-                    q: inputText,
-                    limit: ENTRIES_PER_PAGE,
-                    offset: (currentPage.value - 1) * ENTRIES_PER_PAGE,
-                    q_type: "",
-                    _update: true
-                }
-            })
-        ).data;
+        res = await CopyMangaAPI.SearchForTitle(
+            inputText,
+            ENTRIES_PER_PAGE,
+            (currentPage.value - 1) * ENTRIES_PER_PAGE
+        );
     } catch (err: any) {
         loading.value = false;
         console.error(err);
@@ -99,14 +113,13 @@ async function HandleSearch(page: number = 1, clearValue: boolean = false) {
     if (!res) {
         error.value = "Search error: empty result";
         return;
-    } else if (res.code != 200) {
-        error.value = `Search error: Error from CopyManga: ${res.message} (Response: ${res})`;
-        return;
     }
 
-    searchResult.value = res.results;
+    searchResult.value = res;
     console.log(searchResult.value);
 }
 
-async function ShowMangaDetails(id: string) {}
+async function ShowMangaDetails(id: string) {
+    router.push(`/details/${id}`);
+}
 </script>
