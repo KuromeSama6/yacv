@@ -22,6 +22,7 @@ declare module 'vue' {
     BSpinner: typeof import('bootstrap-vue-next')['BSpinner']
     ErrorBox: typeof import('./src/components/ErrorBox.vue')['default']
     HomeView: typeof import('./src/components/views/HomeView.vue')['default']
+    IFrameRequestSender: typeof import('./src/components/IFrameRequestSender.vue')['default']
     LoadingIndicator: typeof import('./src/components/LoadingIndicator.vue')['default']
     MangaDetailsCard: typeof import('./src/components/manga/MangaDetailsCard.vue')['default']
     MangaDetailsView: typeof import('./src/components/views/MangaDetailsView.vue')['default']
