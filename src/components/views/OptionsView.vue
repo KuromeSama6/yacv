@@ -3,7 +3,6 @@ import { useSettingsStore } from "@/store";
 import { BCol, BContainer, BForm, BFormCheckbox, BRow } from "bootstrap-vue-next";
 import { ref } from "vue";
 import SettingsOptionToggle from "../options/SettingsOptionToggle.vue";
-import { set } from "mongoose";
 import SettingsOptionNumericInput from "../options/SettingsOptionNumericInput.vue";
 
 const settings = useSettingsStore();
