@@ -10,9 +10,12 @@ import { createApp } from "vue";
 import App from "./App.vue";
 import i18n from "./i18n";
 import router from "./router";
+import Cookies from "js-cookie";
+import { useSettingsStore } from "./store";
 
 const app = createApp(App);
 const colorMode = useColorMode();
+
 colorMode.value = "dark";
 
 app.use(router);

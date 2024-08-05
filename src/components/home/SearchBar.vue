@@ -2,7 +2,11 @@
     <BContainer>
         <BRow>
             <BInputGroup class="mt-3">
-                <BFormInput :placeholder="t('HomeView.manga_url_prompt')" v-model="inputText" />
+                <BFormInput
+                    :placeholder="t('home.manga_url_prompt')"
+                    v-model="inputText"
+                    @keydown.enter="HandleSearch(1, true)"
+                />
                 <BButton variant="primary" @click="HandleSearch(1, true)">Search</BButton>
             </BInputGroup>
         </BRow>

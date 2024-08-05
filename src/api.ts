@@ -1,7 +1,10 @@
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import type { IMangaSearchResult } from "./structures/MangaSearch";
 import type { MangaChapter, MangaDescriptor } from "./data/Manga";
 import type { IMangaChapter, IMangaDetails } from "./structures/Manga";
+import type { AccountInfo } from "./data/Account";
+import type { IAccountCredentials } from "./structures/Account";
+import QueryString from "qs";
 
 export module CopyMangaAPI {
     export async function SearchForTitle(
@@ -109,5 +112,48 @@ export module CopyMangaAPI {
         }
 
         return ret;
+    }
+
+    export async function AccountLogin(creds: IAccountCredentials): Promise<AccountInfo> {
+        // Theory: any 4-digit salt works
+        // This is not a real 'salt' algorithm.
+        const salt = Math.round(1000 + Math.random() * 8000);
+        const password = btoa(`${creds.password}-${salt}`);
+        const data = {
+            username: creds.username,
+            password: password,
+            salt: salt,
+            source: "freeSite", // Field functionally unknown
+            version: "2024.01.08", // Field functionally unknown
+            platform: 1
+        };
+
+        const res = await axios.post(
+            `https://api.mangacopy.com/api/v3/login`,
+            QueryString.stringify(data),
+            {
+                headers: {
+                    platform: 1
+                }
+            }
+        );
+
+        if (res.status == 210) {
+            throw `Bad Login: ${res.data.message}`;
+        } else if (res.status != 200) {
+            throw `Request error: Error from CopyManga: ${JSON.stringify(res.data)}`;
+        }
+
+        return res.data.results;
+    }
+
+    export async function GetAccountInfo(token?: string): Promise<AccountInfo> {
+        const res = await axios.get(`https://api.mangacopy.com/api/v3/member/info`, {
+            headers: {
+                Authorization: `Token ${token}`
+            }
+        });
+
+        return res.data.results;
     }
 }

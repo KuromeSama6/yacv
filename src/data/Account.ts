@@ -1,0 +1,31 @@
+export interface AccountInfo {
+    token?: string;
+    user_id: string;
+    username: string;
+    nickname: string;
+    avatar: string;
+    is_authenticated: boolean;
+    datetime_created: string;
+    b_verify_email: boolean;
+    email: string;
+    mobile: any;
+    mobile_region: any;
+    point: number;
+    ticket: number;
+    reward_ticket: number;
+    comic_vip: number;
+    comic_vip_end: any;
+    comic_vip_start: any;
+    cartoon_vip: number;
+    cartoon_vip_end: any;
+    cartoon_vip_start: any;
+    ads_vip_end: any;
+    close_report: boolean;
+    downloads: number;
+    vip_downloads: number;
+    reward_downloads: number;
+    invite_code: any;
+    invited: any;
+    b_sstv: boolean;
+    scy_answer: boolean;
+}

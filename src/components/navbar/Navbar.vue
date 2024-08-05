@@ -15,15 +15,27 @@
                     <BDropdownItem @click="SetLanguage('en')">EN</BDropdownItem>
                     <BDropdownItem @click="SetLanguage('zh')">中文</BDropdownItem>
                 </BNavItemDropdown>
-                <BNavItemDropdown right>
+                <BNavItem href="javascript:;" @click="router.push('/history')">History</BNavItem>
+                <BNavItem href="javascript:;" @click="router.push('/options')">Options</BNavItem>
+                <BNavItemDropdown right v-if="account.IsLoggedIn()">
                     <!-- Using 'button-content' slot -->
                     <template #button-content>
-                        <em>User</em>
+                        <em>{{ account.info?.username }}</em>
                     </template>
-                    <BDropdownItem href="javascript:;">Profile</BDropdownItem>
-                    <BDropdownItem href="javascript:;">Sign Out</BDropdownItem>
+                    <BDropdownItem href="javascript:;" @click="router.push('/account')"
+                        >Profile</BDropdownItem
+                    >
+                    <BDropdownItem href="javascript:;" variant="danger" @click="account.Logout()"
+                        >Sign Out</BDropdownItem
+                    >
                 </BNavItemDropdown>
-                <BNavItem href="javascript:;">Options</BNavItem>
+
+                <BNavItem
+                    v-if="!account.IsLoggedIn()"
+                    href="javascript:;"
+                    @click="router.push('/account')"
+                    >Log In</BNavItem
+                >
             </BNavbarNav>
             <!-- <BNavForm class="d-flex">
                 <BFormInput class="me-2" placeholder="Search for a Manga" />
@@ -38,10 +50,12 @@ import Cookies from "js-cookie";
 import { useI18n } from "vue-i18n";
 import NavBreadcrumbs from "./NavBreadcrumbs.vue";
 import { BNavItem } from "bootstrap-vue-next";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
+import { useAccountStore } from "@/store";
 const { locale } = useI18n();
 
-const route = useRoute();
+const router = useRouter();
+const account = useAccountStore();
 
 function SetLanguage(lang: string) {
     console.log(`Requesting language change to ${lang}`);

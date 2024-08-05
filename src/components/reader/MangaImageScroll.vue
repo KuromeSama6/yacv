@@ -29,7 +29,13 @@ document.addEventListener("scroll", UpdateLoadedImages);
 </script>
 <template>
     <div>
-        <img v-for="link in links" :key="link" :data-src="link" class="lazyload manga-image" />
+        <img
+            v-for="link in links"
+            :key="link"
+            :data-src="link"
+            class="lazyload manga-image"
+            ref="images"
+        />
     </div>
 </template>
 
