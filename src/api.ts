@@ -2,9 +2,15 @@ import axios, { AxiosError } from "axios";
 import type { IMangaSearchResult } from "./structures/MangaSearch";
 import type { MangaChapter, MangaDescriptor } from "./data/Manga";
 import type { IMangaChapter, IMangaDetails } from "./structures/Manga";
-import type { AccountInfo } from "./data/Account";
+import type {
+    AccountHistoryQueryResponse,
+    AccountInfo,
+    FavouritesQueryResponse as BookshelfQueryResponse
+} from "./data/Account";
 import type { IAccountCredentials } from "./structures/Account";
 import QueryString from "qs";
+import { BookshelfQueryOrder } from "./enums/Account";
+import { useAlertsManager } from "./store";
 
 export module CopyMangaAPI {
     export async function SearchForTitle(
@@ -69,14 +75,16 @@ export module CopyMangaAPI {
 
     export async function GetMangaChapterData(
         mangaId: string,
-        chapterId: string
+        chapterId: string,
+        token?: string
     ): Promise<IMangaChapter> {
         const res = (
             await axios.get(
                 `https://api.mangacopy.com/api/v3/comic/${mangaId}/chapter2/${chapterId}`,
                 {
                     headers: {
-                        platform: 1
+                        platform: 1,
+                        Authorization: `Token ${token}`
                     },
                     params: {
                         platform: 1,
@@ -147,13 +155,74 @@ export module CopyMangaAPI {
         return res.data.results;
     }
 
-    export async function GetAccountInfo(token?: string): Promise<AccountInfo> {
-        const res = await axios.get(`https://api.mangacopy.com/api/v3/member/info`, {
-            headers: {
-                Authorization: `Token ${token}`
-            }
-        });
+    //region Account related API calls - Token required
 
-        return res.data.results;
+    export async function GetAccountInfo(token?: string): Promise<AccountInfo> {
+        try {
+            const res = await axios.get(`https://api.mangacopy.com/api/v3/member/info`, {
+                headers: {
+                    Authorization: `Token ${token}`
+                }
+            });
+
+            return res.data.results;
+        } catch (err: any) {
+            if (err.response.status == 401) useAlertsManager().NotifyTokenExpired();
+            throw err;
+        }
+    }
+
+    export async function GetAccountBookshelf(
+        token: string,
+        limit: number,
+        ordering: BookshelfQueryOrder = BookshelfQueryOrder.TIME_UPDATED,
+        offset: number = 0
+    ): Promise<BookshelfQueryResponse> {
+        try {
+            const res = await axios.get(`https://api.mangacopy.com/api/v3/member/collect/comics`, {
+                headers: {
+                    platform: 1,
+                    Authorization: `Token ${token}`
+                },
+                params: {
+                    free_type: 1,
+                    limit: limit,
+                    offset: offset,
+                    ordering: ordering,
+                    _update: true
+                }
+            });
+
+            return res.data.results;
+        } catch (err: any) {
+            if (err.response.status == 401) useAlertsManager().NotifyTokenExpired();
+            throw err;
+        }
+    }
+
+    export async function GetAccountHistory(
+        token: string,
+        limit: number,
+        offset: number = 0
+    ): Promise<AccountHistoryQueryResponse> {
+        try {
+            const res = await axios.get(`https://api.mangacopy.com/api/v3/member/browse/comics`, {
+                headers: {
+                    platform: 1,
+                    Authorization: `Token ${token}`
+                },
+                params: {
+                    free_type: 1,
+                    limit: limit,
+                    offset: offset,
+                    _update: true
+                }
+            });
+
+            return res.data.results;
+        } catch (err: any) {
+            if (err.response.status == 401) useAlertsManager().NotifyTokenExpired();
+            throw err;
+        }
     }
 }

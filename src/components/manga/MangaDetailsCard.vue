@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import type { MangaChapter } from "@/data/Manga";
-import { useMangaStore } from "@/store";
 import { type IManga } from "@/structures/Manga";
 import { Util } from "@/util";
 import {

@@ -8,7 +8,7 @@ import MangaTopNav from "../reader/MangaNav.vue";
 import { CopyMangaAPI } from "@/api";
 import type { IMangaChapter } from "@/structures/Manga";
 import { onBeforeRouteUpdate } from "vue-router";
-import { useLocalHistoryStore } from "@/store";
+import { useAccountStore, useLocalHistoryStore } from "@/store";
 var props = defineProps<{
     mangaId: string;
     chapterId: string;
@@ -25,6 +25,7 @@ const manga = ref<IMangaChapter>();
 const loadedImages = ref<HTMLImageElement[]>([]);
 
 const localHistory = useLocalHistoryStore();
+const account = useAccountStore();
 
 async function Load() {
     loading.value = true;
@@ -39,7 +40,11 @@ async function Load() {
     let res;
     try {
         loadContent.value = "Requesting manga details...";
-        const chapter = await CopyMangaAPI.GetMangaChapterData(props.mangaId, props.chapterId);
+        const chapter = await CopyMangaAPI.GetMangaChapterData(
+            props.mangaId,
+            props.chapterId,
+            account.token
+        );
         manga.value = chapter;
 
         // push to history

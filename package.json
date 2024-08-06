@@ -13,6 +13,10 @@
     "format": "prettier --write src/"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-brands-svg-icons": "^6.6.0",
+    "@fortawesome/free-regular-svg-icons": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
     "@popperjs/core": "^2.11.8",
     "@types/crypto-js": "^4.2.2",
     "@types/js-cookie": "^3.0.6",
@@ -21,12 +25,14 @@
     "bootstrap": "^5.3.3",
     "bootstrap-vue-next": "^0.24.2",
     "cheerio": "^1.0.0-rc.12",
+    "chinese-conv": "^1.1.0",
     "crypto-js": "^4.2.0",
     "i18n": "^0.15.1",
     "js-cookie": "^3.0.5",
     "lazysizes": "^5.3.2",
     "pinia": "^2.2.0",
     "qs": "^6.13.0",
+    "unplugin-vue-components": "^0.27.3",
     "vue": "^3.4.29",
     "vue-i18n": "^10.0.0-beta.5",
     "vue-router": "4"
@@ -45,7 +51,6 @@
     "npm-run-all2": "^6.2.0",
     "prettier": "^3.2.5",
     "typescript": "^5.5.4",
-    "unplugin-vue-components": "^0.27.3",
     "vite": "^5.3.1",
     "vite-plugin-vue-devtools": "^7.3.1",
     "vue-tsc": "^2.0.21"

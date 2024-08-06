@@ -2,6 +2,7 @@
 import { useAccountStore } from "@/store";
 import LoginForm from "../account/LoginForm.vue";
 import { BCol, BContainer, BRow } from "bootstrap-vue-next";
+import BookshelfListing from "../account/BookshelfListing.vue";
 const account = useAccountStore();
 </script>
 
@@ -18,6 +19,15 @@ const account = useAccountStore();
                     <code>{{ account.info?.user_id }}</code>
                 </p>
             </BCol>
+        </BRow>
+        <hr />
+        <BRow>
+            <BNav tabs>
+                <BNavItem active>Your Bookshelf</BNavItem>
+            </BNav>
+        </BRow>
+        <BRow>
+            <BookshelfListing />
         </BRow>
     </BContainer>
 </template>

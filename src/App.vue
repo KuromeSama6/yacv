@@ -1,25 +1,32 @@
 <script setup lang="ts">
 import { RouterView, useRouter } from "vue-router";
 import Navbar from "./components/navbar/Navbar.vue";
-import { useAccountStore, useLocalHistoryStore, useSettingsStore } from "./store";
+import { useAccountStore, useAlertsManager, useLocalHistoryStore, useSettingsStore } from "./store";
 import Cookies from "js-cookie";
 import { CopyMangaAPI } from "./api";
+import { useToast } from "bootstrap-vue-next";
+import AlertsStack from "./components/AlertsStack.vue";
 
 const settings = useSettingsStore();
 const localHistory = useLocalHistoryStore();
 const router = useRouter();
 const account = useAccountStore();
+const toast = useToast();
+const alerts = useAlertsManager();
 
 settings.Read();
 localHistory.Read();
 
 router.beforeEach((to, from, next) => {
-    if (settings.autoSavePath) Cookies.set("_lastRoute", to.fullPath);
+    Cookies.set("_lastRoute", to.fullPath);
+    alerts.alerts = [];
     next();
 });
 
-const lastRoute = settings.autoSavePath ? Cookies.get("_lastRoute") || "/" : "/";
-router.replace(lastRoute).catch(() => {});
+const lastRoute = Cookies.get("_lastRoute") || "/";
+router
+    .replace(settings.autoSavePath || /\/read\/*/.test(lastRoute) ? lastRoute : "/")
+    .catch(() => {});
 
 // handle login
 async function TryTokenLogin() {
@@ -34,6 +41,7 @@ async function TryTokenLogin() {
             console.log(data);
         } catch (err) {
             console.warn("account token expired or invalid!");
+            alerts.NotifyTokenExpired();
             Cookies.remove("token");
         }
 
@@ -50,6 +58,7 @@ TryTokenLogin();
     </header>
 
     <main>
+        <AlertsStack />
         <Navbar />
         <br />
         <RouterView />

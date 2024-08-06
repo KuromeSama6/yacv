@@ -11,6 +11,7 @@
             </BNavbarNav>
             <!-- Right aligned nav items -->
             <BNavbarNav class="ms-auto mb-2 mb-lg-0">
+                <BNavItem href="javascript:;" @click="router.push('/')">Home</BNavItem>
                 <BNavItemDropdown text="Language" right>
                     <BDropdownItem @click="SetLanguage('en')">EN</BDropdownItem>
                     <BDropdownItem @click="SetLanguage('zh')">中文</BDropdownItem>
@@ -26,7 +27,7 @@
                         >Profile</BDropdownItem
                     >
                     <BDropdownItem href="javascript:;" variant="danger" @click="account.Logout()"
-                        >Sign Out</BDropdownItem
+                        >Log Out</BDropdownItem
                     >
                 </BNavItemDropdown>
 

@@ -3,8 +3,11 @@ import { BContainer, BRow } from "bootstrap-vue-next";
 import { ref } from "vue";
 import LocalHistoryPage from "../history/LocalHistoryPage.vue";
 import AccountHistoryPage from "../history/AccountHistoryPage.vue";
+import { useAccountStore } from "@/store";
 
-const showAccountHistory = ref(false);
+const account = useAccountStore();
+
+const showAccountHistory = ref(account.IsLoggedIn());
 </script>
 
 <template>

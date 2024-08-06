@@ -75,6 +75,10 @@ async function ExportSettings() {
                     :min="10"
                     :max="200"
                 />
+                <SettingsOptionToggle
+                    v-model="settings.displayCaughtUpBadge"
+                    t-key="display_caught_up_badge"
+                />
             </BRow>
         </BForm>
     </BContainer>

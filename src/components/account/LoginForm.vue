@@ -48,6 +48,9 @@ async function Login() {
             <BAlert :model-value="true" variant="warning">{{
                 t("account.login.disclaimer")
             }}</BAlert>
+            <BRow>
+                <LoadingIndicator :visible="loading" :content="loadContent" :error="loadError" />
+            </BRow>
             <BForm>
                 <BFormFloatingLabel label="Username" label-for="floatingEmail" class="my-2">
                     <BFormInput
@@ -55,7 +58,6 @@ async function Login() {
                         type="text"
                         placeholder="Username"
                         v-model="usernameInput"
-                        @keydown.enter="Login"
                     />
                 </BFormFloatingLabel>
                 <BFormFloatingLabel label="Password" label-for="floatingPassword" class="my-2">
@@ -64,6 +66,7 @@ async function Login() {
                         type="password"
                         placeholder="Password"
                         v-model="passwordInput"
+                        @keydown.enter="Login"
                     />
                 </BFormFloatingLabel>
             </BForm>
@@ -77,9 +80,6 @@ async function Login() {
             </p>
 
             <small class="text-muted">{{ t("account.login.data_handling_hint") }}</small>
-        </BRow>
-        <BRow>
-            <LoadingIndicator :visible="loading" :content="loadContent" :error="loadError" />
         </BRow>
     </BContainer>
 </template>

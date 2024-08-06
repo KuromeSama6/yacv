@@ -4,15 +4,30 @@ import { Settings } from "./structures/Settings";
 import Cookies from "js-cookie";
 import { ReadingHistory, type HistoryEntry } from "./structures/History";
 import { Account, type IAccountCredentials } from "./structures/Account";
+import type { IAlertData } from "./structures/General";
+import { useRouter } from "vue-router";
 
-export interface MangaDetailsState {
-    currentList: IManga[];
-}
+export const useAlertsManager = defineStore("alerts", {
+    state: (): {
+        alerts: IAlertData[];
+    } => ({
+        alerts: []
+    }),
 
-export const useMangaStore = defineStore("currentMangaDetails", {
-    state: (): MangaDetailsState => ({
-        currentList: []
-    })
+    actions: {
+        Add(alert: IAlertData) {
+            this.alerts.push(alert);
+            alert.visible = true;
+        },
+
+        NotifyTokenExpired() {
+            this.Add({
+                variant: "warning",
+                message: "You account token has expired. Please log in again."
+            });
+            useAccountStore().Logout();
+        }
+    }
 });
 
 export const useSettingsStore = defineStore("settings", {
@@ -99,11 +114,11 @@ export const useAccountStore = defineStore("account", {
             return this.$state.IsLoggedIn();
         },
         async Login(creds: IAccountCredentials) {
-            await this.$state.LogIn(creds);
+            await this.$state.Login(creds);
             Cookies.set("token", this.token || "");
         },
         async Logout() {
-            await this.$state.LogOut();
+            await this.$state.Logout();
         }
     }
 });

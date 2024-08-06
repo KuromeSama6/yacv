@@ -1,3 +1,5 @@
+import type { Manga, MangaChapter, MangaDescriptor } from "./Manga";
+
 export interface AccountInfo {
     token?: string;
     user_id: string;
@@ -28,4 +30,39 @@ export interface AccountInfo {
     invited: any;
     b_sstv: boolean;
     scy_answer: boolean;
+}
+
+export interface BrowseChapterHistory {
+    last_browse_id: string;
+    last_browse_name: string;
+}
+
+export interface FavouriteManga {
+    uuid: number;
+    name: any;
+    b_folder: boolean;
+    folder_id: any;
+    last_browse: BrowseChapterHistory;
+    comic: MangaDescriptor;
+}
+
+export interface FavouritesQueryResponse {
+    list: FavouriteManga[];
+    total: number;
+    limit: number;
+    offset: number;
+}
+
+export interface AccountHistoryEntry {
+    id: number;
+    last_chapter_id: string;
+    last_chapter_name: string;
+    comic: MangaDescriptor;
+}
+
+export interface AccountHistoryQueryResponse {
+    list: AccountHistoryEntry[];
+    total: number;
+    limit: number;
+    offset: number;
 }

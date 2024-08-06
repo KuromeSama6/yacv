@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { useLocalHistoryStore, useSettingsStore } from "@/store";
 import { BContainer, BRow } from "bootstrap-vue-next";
+import { tify } from "chinese-conv";
+import { ref } from "vue";
 import { useRouter } from "vue-router";
 import { RouterLink } from "vue-router";
 
@@ -21,7 +23,7 @@ const settings = useSettingsStore();
         <BListGroup>
             <BListGroupItem
                 v-for="item in [...history.reads].reverse()"
-                :key="item.date"
+                :key="item.chapter.manga.path_word"
                 href="javascript:;"
                 class="flex-column align-items-start"
                 @click="

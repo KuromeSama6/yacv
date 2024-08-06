@@ -26,6 +26,9 @@ export interface MangaDescriptor {
     cover: string;
     last_chapter: LastChapter;
     popular: number;
+
+    last_chapter_id?: string;
+    last_chapter_name?: string;
 }
 
 export interface FreeType {
