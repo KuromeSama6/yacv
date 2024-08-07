@@ -7,7 +7,9 @@
                     v-model="inputText"
                     @keydown.enter="HandleSearch(1, true)"
                 />
-                <BButton variant="primary" @click="HandleSearch(1, true)">Search</BButton>
+                <BButton variant="primary" @click="HandleSearch(1, true)">{{
+                    t("home.search_bar.search_button")
+                }}</BButton>
             </BInputGroup>
         </BRow>
         <BRow class="mt-3" v-if="loading">
@@ -46,7 +48,9 @@
         </BRow>
     </BContainer>
 
-    <p v-if="searchResult && !searchResult.list.length">No titles found.</p>
+    <p v-if="searchResult && !searchResult.list.length">
+        {{ t("home.search_bar.no_titles_found") }}
+    </p>
 </template>
 
 <script setup lang="ts">
@@ -97,7 +101,7 @@ async function HandleSearch(page: number = 1, clearValue: boolean = false) {
     if (clearValue) searchResult.value = null;
     error.value = null;
     loading.value = true;
-    currentStep.value = "Searching...";
+    currentStep.value = t("home.search_bar.searching");
 
     var res;
 

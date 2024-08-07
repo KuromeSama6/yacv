@@ -99,4 +99,5 @@ export interface MangaChapter {
 export interface Manga {
     name: string;
     path_word: string;
+    uuid: string;
 }

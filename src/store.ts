@@ -6,6 +6,16 @@ import { ReadingHistory, type HistoryEntry } from "./structures/History";
 import { Account, type IAccountCredentials } from "./structures/Account";
 import type { IAlertData } from "./structures/General";
 import { useRouter } from "vue-router";
+import { useI18n } from "vue-i18n";
+import i18n from "./i18n";
+
+export const useGlobalVars = defineStore("globalVars", {
+    state: (): {
+        apiStatusChecked: boolean;
+    } => ({
+        apiStatusChecked: false
+    })
+});
 
 export const useAlertsManager = defineStore("alerts", {
     state: (): {
@@ -23,7 +33,7 @@ export const useAlertsManager = defineStore("alerts", {
         NotifyTokenExpired() {
             this.Add({
                 variant: "warning",
-                message: "You account token has expired. Please log in again."
+                message: i18n.global.t("account.hint.token_expired")
             });
             useAccountStore().Logout();
         }
@@ -119,6 +129,9 @@ export const useAccountStore = defineStore("account", {
         },
         async Logout() {
             await this.$state.Logout();
+        },
+        async UpdateBookshelfCache() {
+            await this.$state.UpdateBookshelfCache();
         }
     }
 });

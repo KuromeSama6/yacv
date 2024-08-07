@@ -9,13 +9,15 @@ import { CopyMangaAPI } from "@/api";
 import type { IMangaChapter } from "@/structures/Manga";
 import { onBeforeRouteUpdate } from "vue-router";
 import { useAccountStore, useLocalHistoryStore } from "@/store";
+import { useI18n } from "vue-i18n";
 var props = defineProps<{
     mangaId: string;
     chapterId: string;
 }>();
+const { t } = useI18n();
 
 const loading = ref(true);
-const loadContent = ref("Loading details...");
+const loadContent = ref("");
 const loadError = ref<string | null>();
 
 const links = ref<string[]>([]);
@@ -39,7 +41,7 @@ async function Load() {
 
     let res;
     try {
-        loadContent.value = "Requesting manga details...";
+        loadContent.value = t("reader.loading.requesting_details");
         const chapter = await CopyMangaAPI.GetMangaChapterData(
             props.mangaId,
             props.chapterId,
@@ -53,7 +55,7 @@ async function Load() {
             date: new Date()
         });
 
-        loadContent.value = "Requesting images...";
+        loadContent.value = t("reader.loading.requesting_images");
         res = await CopyMangaAPI.GetChapterImageLinks(props.mangaId, props.chapterId);
     } catch (err: any) {
         loading.value = false;
@@ -62,7 +64,7 @@ async function Load() {
         return;
     }
 
-    loadContent.value = "Processing pages";
+    loadContent.value = t("reader.loading.processing_pages");
     links.value = res;
     loading.value = false;
     loadFinished.value = true;
@@ -87,7 +89,7 @@ onBeforeRouteUpdate((to, from, next) => {
         <MangaImageScroll :links="links" v-model="loadedImages" />
         <LoadingIndicator
             :visible="loadedImages.length < links.length"
-            content="More images on the way..."
+            :content="t('reader.loading.more_images')"
         />
         <MangaTopNav :manga="manga" :loadedImages="loadedImages" />
     </div>

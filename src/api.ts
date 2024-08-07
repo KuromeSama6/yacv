@@ -225,4 +225,28 @@ export module CopyMangaAPI {
             throw err;
         }
     }
+
+    export async function SetTitleStarred(token: string, mangaId: string, isStarred: boolean) {
+        const data = {
+            comic_id: mangaId,
+            is_collect: isStarred ? 1 : 0,
+            _update: true
+        };
+
+        try {
+            await axios.post(
+                `https://api.mangacopy.com/api/v3/member/collect/comic`,
+                QueryString.stringify(data),
+                {
+                    headers: {
+                        platform: 1,
+                        Authorization: `Token ${token}`
+                    }
+                }
+            );
+        } catch (err: any) {
+            if (err.response.status == 401) useAlertsManager().NotifyTokenExpired();
+            throw err;
+        }
+    }
 }

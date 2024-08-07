@@ -10,7 +10,7 @@ const account = useAccountStore();
 const { t } = useI18n();
 
 const loading = ref(false);
-const loadContent = ref("Loading details...");
+const loadContent = ref("");
 const loadError = ref<string | null>();
 
 const usernameInput = ref<string>();
@@ -21,7 +21,7 @@ async function Login() {
     if (!usernameInput.value || !passwordInput.value) return;
 
     loading.value = true;
-    loadContent.value = "Logging in...";
+    loadContent.value = t("account.login.logging_in");
     loadError.value = null;
 
     const creds: IAccountCredentials = {
@@ -44,7 +44,7 @@ async function Login() {
     <!-- Login form -->
     <BContainer>
         <BRow>
-            <h2 class="text-center">Log In to CopyManga</h2>
+            <h2 class="text-center">{{ t("account.login.form_title") }}</h2>
             <BAlert :model-value="true" variant="warning">{{
                 t("account.login.disclaimer")
             }}</BAlert>
@@ -52,30 +52,40 @@ async function Login() {
                 <LoadingIndicator :visible="loading" :content="loadContent" :error="loadError" />
             </BRow>
             <BForm>
-                <BFormFloatingLabel label="Username" label-for="floatingEmail" class="my-2">
+                <BFormFloatingLabel
+                    :label="t('account.login.username_hint')"
+                    label-for="floatingEmail"
+                    class="my-2"
+                >
                     <BFormInput
                         id="floatingEmail"
                         type="text"
-                        placeholder="Username"
+                        :laceholder="t('account.login.username_hint')"
                         v-model="usernameInput"
                     />
                 </BFormFloatingLabel>
-                <BFormFloatingLabel label="Password" label-for="floatingPassword" class="my-2">
+                <BFormFloatingLabel
+                    :label="t('account.login.password_hint')"
+                    label-for="floatingPassword"
+                    class="my-2"
+                >
                     <BFormInput
                         id="floatingPassword"
                         type="password"
-                        placeholder="Password"
+                        :placeholder="t('account.login.password_hint')"
                         v-model="passwordInput"
                         @keydown.enter="Login"
                     />
                 </BFormFloatingLabel>
             </BForm>
-            <BButton variant="primary" :disabled="loading" @click="Login">Login</BButton>
+            <BButton variant="primary" :disabled="loading" @click="Login">{{
+                t("account.login.login_button")
+            }}</BButton>
         </BRow>
         <br />
         <BRow class="text-center">
             <p>
-                Dont have an account? Register on
+                {{ t("account.login.register_hint") }}
                 <a href="https://mangacopy.com" target="_blank">CopyManga</a>
             </p>
 

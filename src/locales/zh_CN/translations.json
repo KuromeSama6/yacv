@@ -1,0 +1,97 @@
+{
+  "account": {
+    "login": {
+      "data_handling_hint": "您的数据仅会被发送至「拷贝漫画」服务器。",
+      "disclaimer": "在此登录，即表示您同意本网络应用程序 Yet Another CopyManga Viewer 代表您获取和修改存在于「拷贝漫画」上的您的数据，包括但不限于您的“书架”，您的漫画阅读进度等。除了「拷贝漫画」和相关 API 服务器之外，YACV 不会将您的数据发送到任何地方，也不会与任何其他方共享您的登录信息，包括用户名与密码。YACV 从不会代表您更改您的帐户凭据（如帐户密码）。如果您不确定 YACV 的真实性，或不知道 YACV 可以代表您修改哪些数据，请查看 Github 上的 YACV 源代码和使用指南。您在此登录时还同意，YACV、其过去、现在和将来的作者，以及为 YACV 提供运营服务的服务商对您的财产，包括但不限于您的 CopyManga 帐户、您的数字身份或您的物理设备所造成的任何损坏不承担任何法律或其他责任。",
+      "form_title": "登录至拷贝漫画",
+      "logging_in": "正在登录...",
+      "password_hint": "密码",
+      "register_hint": "没有账号？ 请前往拷贝漫画注册。",
+      "username_hint": "拷贝漫画用户名",
+      "login_button": "登录"
+    },
+    "hint": {
+      "manual_logged_out": "您已成功登出。",
+      "token_expired": "您的登录信息已过期。请重新登录。"
+    }
+  },
+  "errorbox": {
+    "hint": {
+      "check_console": "Check console for more details."
+    }
+  },
+  "home": {
+    "manga_url_prompt": "搜索一部作品。",
+    "account_card": {
+      "button": {
+        "bookshelf": "书架",
+        "history": "浏览记录"
+      },
+      "lets_get_reading": "开始阅读吧，{0}."
+    },
+    "affiliation_disclaimer": "YACV与其的开发者和拷贝漫画没有任何关联。",
+    "log_in_button": "去登录",
+    "not_logged_in_hint": "您还未登录。",
+    "not_logged_in_rationale": "登录您的拷贝漫画账号以查看您的书架并使用账号功能。",
+    "title": "又是一个拷贝漫画阅读器",
+    "updates_card": {
+      "check_github": "在Github上查看项目源码：",
+      "title": "YACV更新公告"
+    },
+    "search_bar": {
+      "no_titles_found": "未查询到任何作品。",
+      "search_button": "搜索",
+      "searching": "搜索中..."
+    },
+    "search_results": {
+      "popularity_badge": "热度 {0}"
+    }
+  },
+  "options": {
+    "option": {
+      "autosave_path": {
+        "desc": "保存浏览进度，以便下次继续浏览。如果禁用，每次重新加载网页时都将从主页面开始。如果您正处于阅读器中，无论是否使用该选项，您都将继续从上次离开的地方开始。",
+        "name": "保存浏览位置"
+      },
+      "display_caught_up_badge": {
+        "desc": "在拷贝漫画账户历史记录和账户书架中已阅读最新章节的书目上显示绿色的\"已读\"徽章。",
+        "name": "展示\"已读\"徽章"
+      },
+      "local_history_size": {
+        "desc": "保存在浏览器本地存储中的历史记录条目的数量。当达到上限时，较旧的条目会被优先删除。将此值设置过大可能会导致本地浏览记录功能异常。",
+        "name": "本地浏览记录限制"
+      }
+    }
+  },
+  "navbar": {
+    "option": {
+      "history": "浏览记录",
+      "home": "主页",
+      "login": "登录",
+      "logout": "登出",
+      "options": "设置",
+      "profile": "账户主页",
+      "language": "语言"
+    }
+  },
+  "reader": {
+    "loading": {
+      "more_images": "更多图片正在路上...",
+      "processing_pages": "处理图片中",
+      "requesting_details": "获取漫画信息",
+      "requesting_images": "获取图片地址"
+    },
+    "nav": {
+      "button": {
+        "back": "返回",
+        "details": "详情",
+        "next": "下一话",
+        "prev": "上一话",
+        "star": "收藏",
+        "unstar": "取消收藏"
+      },
+      "hint_login_2": "以收藏本作品。",
+      "hint_login": "登录"
+    }
+  }
+}

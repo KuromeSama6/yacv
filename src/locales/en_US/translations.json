@@ -1,0 +1,97 @@
+{
+  "account": {
+    "login": {
+      "data_handling_hint": "Your data is sent to CopyManga servers only.",
+      "disclaimer": "By logging in here, you consent to this webapp, Yet Another CopyManga Viewer, to act on your behalf to obtain and modify your data on CopyManga, including but not limited titles you marked as favourite, your reading progress in individual chapters, etc. YACV will not send your data anywhere or share your credentials with any other parties except for CopyManga and related API servers. YACV will not alter your account credentials, such as your account password, on behalf of you. If you are unsure about the authenticity of YACV, or is unaware of what data may be modified by YACV on your behalf, you should check out YACV's source and usage guides on Github. You also consent, by logging in here, that YACV, its past, current, and future author(s), and services on which YACV is hosted may not be held responsible, legally or otherwise, for any damage caused to your properties, including but not limited to your CopyManga account, your digital identity, or your physical device.",
+      "logging_in": "Logging in...",
+      "form_title": "Log In to CopyManga",
+      "username_hint": "Username",
+      "password_hint": "Password",
+      "register_hint": "Dont have an account? Register on",
+      "login_button": "Login"
+    },
+    "hint": {
+      "manual_logged_out": "You have been logged out.",
+      "token_expired": "You account token has expired. Please log in again."
+    }
+  },
+  "errorbox": {
+    "hint": {
+      "check_console": "请检查开发者日志中的错误信息。"
+    }
+  },
+  "home": {
+    "manga_url_prompt": "Search for a title.",
+    "title": "Yet Another CopyManga Viewer",
+    "not_logged_in_hint": "You're not logged in.",
+    "not_logged_in_rationale": "Log in with your CopyManga account to access your account favourites and other account features.",
+    "log_in_button": "Log In",
+    "affiliation_disclaimer": "YACV or its author(s) are not affiliated with CopyManga.",
+    "account_card": {
+      "lets_get_reading": "Let`s get reading, {0}.",
+      "button": {
+        "bookshelf": "Bookshelf",
+        "history": "Reading History"
+      }
+    },
+    "updates_card": {
+      "title": "YACV Updates",
+      "check_github": "Check out more on"
+    },
+    "search_bar": {
+      "search_button": "Search",
+      "no_titles_found": "No titles found.",
+      "searching": "Searching..."
+    },
+    "search_results": {
+      "popularity_badge": "{0} Reads"
+    }
+  },
+  "options": {
+    "option": {
+      "autosave_path": {
+        "desc": "Saves your browsing progress so you can continue where you left off the next time. When disabled, you'll start in the home screen every time you reload the webpage. If you're were in the middle of reading, you'll always continue where you've left off, regardless of this option.",
+        "name": "Save Browsing Location"
+      },
+      "display_caught_up_badge": {
+        "desc": "Displays a green \"Caught Up\" badge on titles that you have read the latest chapter of in your CopyManga account history and your account bookshelf.",
+        "name": "Display \"Caught Up\" Badge"
+      },
+      "local_history_size": {
+        "desc": "The amount of history entries saved in your browser's local storage. Older entries are deleted first when the limit is reached. Setting this value too large may lead to unexpected behavior.",
+        "name": "Local History Limit"
+      }
+    }
+  },
+  "navbar": {
+    "option": {
+      "home": "Home",
+      "history": "History",
+      "options": "Options",
+      "profile": "Profile",
+      "logout": "Log Out",
+      "login": "Log In",
+      "language": "Language"
+    }
+  },
+  "reader": {
+    "loading": {
+      "requesting_details": "Requesting manga details...",
+      "requesting_images": "Requesting images...",
+      "processing_pages": "Processing pages",
+      "more_images": "More images on the way..."
+    },
+    "nav": {
+      "hint_login": "Log in",
+      "hint_login_2": "to star this title",
+      "button": {
+        "prev": "Previous",
+        "details": "Details",
+        "star": "Star",
+        "unstar": "Unstar",
+        "next": "Next",
+        "back": "Go Back"
+      }
+    }
+  }
+}

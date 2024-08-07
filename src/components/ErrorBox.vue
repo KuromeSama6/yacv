@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import i18n from "@/i18n";
 import { BAlert } from "bootstrap-vue-next";
 import { defineProps } from "vue";
+import { useI18n } from "vue-i18n";
 
+const { t } = useI18n();
 const props = defineProps<{
     errorMessage: string | null;
 }>();
@@ -13,7 +16,7 @@ const props = defineProps<{
             {{ props.errorMessage }}
             <br />
 
-            <small>Check console for thrown errors.</small>
+            <small>{{ t("errorbox.hint.check_console") }}</small>
         </BAlert>
     </div>
 </template>
