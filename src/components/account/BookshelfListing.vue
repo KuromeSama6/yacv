@@ -3,13 +3,11 @@ import { CopyMangaAPI } from "@/api";
 import { type FavouriteManga } from "@/data/Account";
 import { BookshelfQueryOrder } from "@/enums/Account";
 import { useAccountStore, useSettingsStore } from "@/store";
-import { Util } from "@/util";
 import { BCol, BContainer, BRow } from "bootstrap-vue-next";
+import { tify } from "chinese-conv";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
-import { RouterLink } from "vue-router";
 import SearchBar from "../SearchBar.vue";
-import { tify } from "chinese-conv";
 
 const router = useRouter();
 const account = useAccountStore();
@@ -29,12 +27,7 @@ async function Loadbookshelf() {
 
     if (total.value == 0 || bookshelf.value.length < total.value) {
         loading.value = true;
-        const res = await CopyMangaAPI.GetAccountBookshelf(
-            account.token || "",
-            ENTRIES_PER_LOAD,
-            BookshelfQueryOrder.TIME_UPDATED,
-            bookshelf.value.length
-        );
+        const res = await CopyMangaAPI.GetAccountBookshelf(account.token || "", ENTRIES_PER_LOAD, BookshelfQueryOrder.TIME_UPDATED, bookshelf.value.length);
         initialLoad.value = true;
         loading.value = false;
 
@@ -62,22 +55,10 @@ function GetFilteredResults() {
             <SearchBar v-model="searchKeyword" placeholder="Search for a title..." />
         </BRow>
         <BRow style="margin-top: 1rem">
-            <small class="text-muted" v-if="total > 0"
-                >Total {{ total }} entries in bookshelf.</small
-            >
+            <small class="text-muted" v-if="total > 0">Total {{ total }} entries in bookshelf.</small>
             <small class="text-muted" v-if="total == 0 && initialLoad">Nothing in bookshelf.</small>
             <BListGroup>
-                <BListGroupItem
-                    v-for="item in GetFilteredResults()"
-                    :key="item.uuid"
-                    href="javascript:;"
-                    class="flex-column align-items-start"
-                    @click="
-                        router.push(
-                            `/read/${item.comic.path_word}/${item.last_browse.last_browse_id}`
-                        )
-                    "
-                >
+                <BListGroupItem v-for="item in GetFilteredResults()" :key="item.uuid" href="javascript:;" class="flex-column align-items-start" @click="router.push(item.last_browse ? `/read/${item.comic.path_word}/${item.last_browse.last_browse_id}` : `/details/${item.comic.path_word}`)">
                     <BRow>
                         <BCol sm="2">
                             <img class="manga-thumb" :src="item.comic.cover" />
@@ -87,27 +68,10 @@ function GetFilteredResults() {
                                 <div>
                                     <h5 class="mb-1">
                                         {{ item.comic.name }}
-                                        <BBadge
-                                            variant="success"
-                                            v-if="
-                                                item.last_browse?.last_browse_id ==
-                                                    item.comic.last_chapter_id &&
-                                                settings.displayCaughtUpBadge
-                                            "
-                                            >Caught Up</BBadge
-                                        ><BBadge
-                                            variant="danger"
-                                            v-if="
-                                                item.last_browse?.last_browse_id !=
-                                                item.comic.last_chapter_id
-                                            "
-                                            >New</BBadge
-                                        >
+                                        <BBadge variant="success" v-if="item.last_browse?.last_browse_id == item.comic.last_chapter_id && settings.displayCaughtUpBadge">Caught Up</BBadge><BBadge variant="danger" v-if="item.last_browse?.last_browse_id != item.comic.last_chapter_id">New</BBadge>
                                     </h5>
                                 </div>
-                                <small class="text-body-secondary"
-                                    >Latest: {{ item.comic.last_chapter_name }}</small
-                                >
+                                <small class="text-body-secondary">Latest: {{ item.comic.last_chapter_name }}</small>
                             </div>
 
                             <p class="mb-1">
@@ -121,13 +85,7 @@ function GetFilteredResults() {
             </BListGroup>
         </BRow>
         <BRow style="margin-top: 1rem">
-            <BButton
-                block
-                variant="primary"
-                v-if="bookshelf.length < total && !loading"
-                @click="Loadbookshelf"
-                >Load More ({{ total - bookshelf.length }} to go)</BButton
-            >
+            <BButton block variant="primary" v-if="bookshelf.length < total && !loading" @click="Loadbookshelf">Load More ({{ total - bookshelf.length }} to go)</BButton>
         </BRow>
     </BContainer>
 </template>
