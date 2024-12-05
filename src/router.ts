@@ -1,12 +1,11 @@
-import { createMemoryHistory, createRouter } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
+import AccountView from "./components/views/AccountView.vue";
+import HistoryView from "./components/views/HistoryView.vue";
 import HomeView from "./components/views/HomeView.vue";
 import MangaDetailsView from "./components/views/MangaDetailsView.vue";
 import MangaReader from "./components/views/MangaReader.vue";
-import Cookies from "js-cookie";
 import OptionsView from "./components/views/OptionsView.vue";
-import HistoryView from "./components/views/HistoryView.vue";
-import AccountView from "./components/views/AccountView.vue";
 
 const routes = [
     { path: "/", component: HomeView },
@@ -16,18 +15,18 @@ const routes = [
     {
         path: "/details/:mangaId",
         component: MangaDetailsView,
-        props: true
+        props: true,
     },
     {
         path: "/read/:mangaId/:chapterId",
         component: MangaReader,
-        props: true
-    }
+        props: true,
+    },
 ];
 
 const router = createRouter({
-    history: createMemoryHistory(),
-    routes
+    history: createWebHashHistory(),
+    routes,
 });
 
 export default router;
